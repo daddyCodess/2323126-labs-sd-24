@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        } 
+
+        header{
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            width: 100%;
+            padding: 10px 0;
+        }
+
+        footer {
+            margin-top: 3%;
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            width: 100%;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        main h2, main h3, main p {
+            text-align: center;
+        }
+
+        main img {
+            width: 600px;
+            height: 400px;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <h2>Welcome to Software Design Website</h2>
+    <nav>
+        <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <article>
+        <h3>About Us</h3>
+        <p>We are a company dedicated to providing excellent services to our customers.</p>
+        <img src="https://images.pexels.com/photos/792381/pexels-photo-792381.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tiger">
+    </article>
+
+
+    <table>
+        <caption><h3>Our Services</h3></caption>
+        <tr>
+            <td>
+                <article>
+                    <h3>Web Development</h3>
+                    <p>We specialize in creating responsive and user-friendly websites.</p>
+                    <img src="https://images.pexels.com/photos/792381/pexels-photo-792381.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tiger">
+                </article>
+            </td>
+            <td>
+                <article>
+                    <h3>Graphic Design</h3>
+                    <p>Our talented designers can bring your ideas to life with stunning visuals.</p>
+                    <img src="https://images.pexels.com/photos/792381/pexels-photo-792381.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tiger">
+                </article>
+            </td>
+        </tr>
+    </table>
+</main>
+
+<footer>
+    <p>2024 The Lucky Company. All rights reserved.</p>
+</footer>
+</body>
+</html>
