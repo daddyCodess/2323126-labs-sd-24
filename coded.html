@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        header {
+            margin-top: 50px;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            width: 300px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #country-info {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        #country-info h2 {
+            margin-bottom: 10px;
+        }
+
+        #country-info img {
+            max-width: 200px;
+            margin-bottom: 10px;
+        }
+
+        #bordering-countries {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        #bordering-countries h2 {
+            margin-bottom: 10px;
+        }
+
+        #bordering-countries ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #bordering-countries li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        #bordering-countries li img {
+            max-width: 50px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Country Information</h1>
+    </header>
+    <main>
+        <form id="country-form">
+            <label for="countryName">Enter Country Name:</label>
+            <input type="text" id="countryName" name="countryName" placeholder="E.g., United States">
+            <button type="submit">Get Country Info</button>
+        </form>
+        <section id="country-info" style="display: none;">
+            <div id="country-data">
+                <h2></h2>
+                <p>Capital: <span id="capital"></span></p>
+                <p>Population: <span id="population"></span></p>
+                <p>Continent: <span id="continent"></span></p>
+                <img id="flag" src="" alt="Flag">
+            </div>
+            <div id="bordering-countries">
+                <h2>Bordering Countries</h2>
+                <ul id="bordering-countries-list"></ul>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById('country-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const countryName = document.getElementById('countryName').value;
+            fetch(`https://restcountries.com/v3.1/name/${countryName}`)
+            .then(response => response.json())
+            .then(data => {
+                const countryData = data[0];
+                const countryInfo = document.getElementById('country-info');
+                const countryDataSection = document.getElementById('country-data');
+
+                // Display country information
+                countryDataSection.style.display = 'block';
+                countryDataSection.querySelector('h2').textContent = countryData.name.common;
+                document.getElementById('capital').textContent = countryData.capital ? countryData.capital[0] : 'N/A';
+                document.getElementById('population').textContent = countryData.population ? countryData.population.toLocaleString() : 'N/A';
+                document.getElementById('continent').textContent = countryData.region ? countryData.region : 'N/A';
+                document.getElementById('flag').src = countryData.flags.svg;
+
+                // Display bordering countries
+                const borderingCountriesList = document.getElementById('bordering-countries-list');
+                borderingCountriesList.innerHTML = '';
+                if (countryData.borders) {
+                    countryData.borders.slice(0, 3).forEach(border => {
+                        const listItem = document.createElement('li');
+                        const borderCountry = data.find(country => country.cca3 === border);
+                        if (borderCountry) {
+                            const countryName = borderCountry.name.common;
+                            const countryFlag = borderCountry.flags.svg;
+                            listItem.innerHTML = `<img src="${countryFlag}" alt="${countryName} flag">${countryName}`;
+                            borderingCountriesList.appendChild(listItem);
+                        }
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Country not found! Please enter a valid country name.');
+            });
+        });
+    </script>
+</body>
+</html>
